@@ -1,0 +1,26 @@
+{
+  "name": "westside",
+  "version": "1.0.0",
+  "description": "Revamped version of bcc",
+  "main": "app/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WoleObayomi/WestSide.git"
+  },
+  "author": "Wole Obayomi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WoleObayomi/WestSide/issues"
+  },
+  "homepage": "https://github.com/WoleObayomi/WestSide#readme",
+  "dependencies": {
+    "node-soundcloud": "0.0.3",
+    "socket.io": "^1.3.6"
+  },
+  "engines":{
+    "node":"0.12.7"
+  }
+}
