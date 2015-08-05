@@ -24,22 +24,6 @@ function connectHandler(req,res,next)
   res.end();
   next();
 }
-app.get("/",connectHandler);
-
-function tokenHandler(req,res){
-  var code = req.query.code;
-  SC.authorize(code,function(err,accessToken){
-    if(err)
-    {
-      console.log(err);
-    }
-    else
-    {
-      console.log("Access Token:",accessToken);
-    }
-  });
-  res.render("index.jade",{scripts:["js/ws.js"]});
-}
 
 io.on("connection",function(socket){
   var user = new User(socket,"User");
@@ -51,3 +35,5 @@ SC.init({
   secret:"97708910783570592a82d0a37f462f57",
   uri:"https://dry-tor-1298.herokuapp.com/"
 });
+
+app.get("/",connectHandler);
