@@ -1,6 +1,7 @@
 var express = require("express");
 var app = express();
 var http = require("http");
+var https = require("https");
 var server = http.Server(app);
 var io = require("socket.io")(server);
 var port = process.env.PORT||3000;
@@ -27,7 +28,7 @@ SC.getLoginUrl({
   },
   success:function(url)
   {
-    http.get(url,function(err,data){
+    https.get(url,function(err,data){
       console.log(data);
     });
   }
