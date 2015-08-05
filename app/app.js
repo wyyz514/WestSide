@@ -1,6 +1,7 @@
 var express = require("express");
 var app = express();
-var server = require("http").Server(app);
+var http = require("http");
+var server = http.Server(app);
 var io = require("socket.io")(server);
 var port = process.env.PORT||3000;
 var path = require("path");
@@ -26,8 +27,8 @@ SC.getLoginUrl({
   },
   success:function(url)
   {
-    app.get(url,function(req,res){
-      console.log(req);
+    http.get(url,function(err,data){
+      console.log(data);
     });
   }
 });
