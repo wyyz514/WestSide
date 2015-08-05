@@ -6,17 +6,18 @@ var io = require("socket.io")(server);
 var port = process.env.PORT||3000;
 var path = require("path");
 var User = require("./user.js");
-var SC = require("./public/js/soundcloud.js");
+var sc = require("./sc.js");
 
 app.set("view engine","jade");
 app.set("views",path.join(__dirname,"/views"));
 app.use(express.static(__dirname+"/public"));
+
 server.listen(port,function(){
   console.log("Listening on port",port);
 });
 
 app.get("/",function(req,res){
   res.render("index",{scripts:["js/soundcloud.js","js/ws.js"]});
+  sc.showAuthPopup();
 });
 
-console.log(SC);

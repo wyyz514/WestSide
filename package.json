@@ -21,6 +21,7 @@
     "jade": "^1.11.0",
     "machinepack-soundcloud": "^0.3.1",
     "node-soundcloud": "0.0.3",
+    "request": "^2.60.0",
     "socket.io": "^1.3.6"
   },
   "engines": {
