@@ -17,7 +17,10 @@ server.listen(port,function(){
 });
 
 app.get("/",function(req,res){
-  res.render("index",{scripts:["js/soundcloud.js","js/ws.js"]});
+  res.render("index",{scripts:["js/ws.js"]});
   sc.showAuthPopup();
 });
 
+app.get("/success",function(req,res){
+  res.render("success");
+})
