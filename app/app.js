@@ -23,5 +23,5 @@ app.get("/",function(req,res){
 
 app.get("/success",function(req,res){
   if(req.params.code)
-    res.render("success",{code:code});
+    res.render("success",{code:req.params.code});
 });
