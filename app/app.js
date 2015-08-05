@@ -16,7 +16,7 @@ server.listen(port,function(){
 
 app.get("/",function(req,res,next){
   console.log("Authorizing...(1)");
-  var scAuth = SC.getConnectUrl();
+  var scAuth = SC.getConnectUrl()+"?display=popup";
   res.writeHead(301,{Location:scAuth});
   res.end();
   next();
@@ -32,7 +32,7 @@ app.use(function(req,res){
     }
     else
     {
-      console.log(accessToken);
+      console.log("Access Token:",accessToken);
     }
   });
 });
