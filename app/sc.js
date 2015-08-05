@@ -8,7 +8,7 @@ var sc = (function(){
   var responseType = "code";
   function getConnectUrl()
   {
-    return soundcloudUrl+"?client_id="+clientID+"&redirect_uri="+redirect+"&response_type="+responseType;
+    return soundcloudUrl+"?client_id="+clientID+"&redirect_uri="+redirect+"&response_type="+responseType+"&display=popup";
   }
   
   return {
