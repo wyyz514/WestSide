@@ -24,8 +24,10 @@ SC.getLoginUrl({
   error:function(err){
     console.log(err);
   },
-  success:function(data)
+  success:function(url)
   {
-    console.log(data);
+    app.get(url,function(req,res){
+      console.log(req);
+    });
   }
 });
