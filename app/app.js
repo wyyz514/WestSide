@@ -6,6 +6,7 @@ var io = require("socket.io")(server);
 var port = process.env.PORT||3000;
 var path = require("path");
 var User = require("./user.js");
+var SC = require("js/soundcloud.js");
 
 app.set("view engine","jade");
 app.set("views",path.join(__dirname,"/views"));
@@ -14,3 +15,8 @@ server.listen(port,function(){
   console.log("Listening on port",port);
 });
 
+app.get("/",function(req,res){
+  res.render("index",{scripts:["js/soundcloud.js","js/ws.js"]});
+});
+
+console.log(SC);
