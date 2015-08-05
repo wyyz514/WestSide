@@ -16,11 +16,10 @@ server.listen(port,function(){
 
 app.get("/",function(req,res,next){
   console.log("Authorizing...(1)");
-  var scAuth = SC.getConnectUrl()+"?display=popup";
+  var scAuth = SC.getConnectUrl()+"display=popup";
   res.writeHead(301,{Location:scAuth});
   res.end();
   next();
-  //res.render("index.jade",{scripts:["js/ws.js"]});
 });
 
 app.use(function(req,res){
@@ -35,6 +34,7 @@ app.use(function(req,res){
       console.log("Access Token:",accessToken);
     }
   });
+  res.render("index.jade",{scripts:["js/ws.js"]});
 });
 
 io.on("connection",function(socket){
