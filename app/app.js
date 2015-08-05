@@ -17,9 +17,8 @@ server.listen(port,function(){
 });
 
 app.get("/",function(req,res){
-  if(false)
-    res.writeHead(302,Location:sc.getConnectUrl());
-    res.end();
+  res.writeHead(302,{Location:sc.getConnectUrl()});
+  res.end();
 });
 
 app.get("/success",function(req,res){
