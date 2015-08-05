@@ -10,11 +10,11 @@ var sc = (function(){
     request.get(soundcloudUrl+"?client_id="+clientID,function(err,resp){
       if(err)
       {
-        console.log(errr);
+        console.log(err);
       }
       else
       {
-        console.log(resp);
+        console.log(Object.keys(resp));
       }
     });
   }
