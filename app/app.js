@@ -13,16 +13,19 @@ app.use(express.static(__dirname+"/public"));
 server.listen(port,function(){
   console.log("Listening on port",port);
 });
-app.use(connectHandler);
-app.use(tokenHandler);
 
 function connectHandler(req,res,next)
 {
   console.log("Authorizing...(1)");
-  var scAuth = SC.getConnectUrl()+"display=popup";
+  var scAuth = SC.getConnectUrl()+"&display=popup";
   res.writeHead(301,{Location:scAuth});
   res.end();
-  next();
+  //next();
+}
+
+function tokenHandler(req,res)
+{
+  console.log(req.params);
 }
 
 io.on("connection",function(socket){
@@ -36,4 +39,6 @@ SC.init({
   uri:"https://dry-tor-1298.herokuapp.com/"
 });
 
-app.get("/",connectHandler);
+app.get("/",function(req,res){
+  connectHandler(req,res,tokenHandler);
+});
