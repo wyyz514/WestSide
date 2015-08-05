@@ -13,16 +13,20 @@ app.use(express.static(__dirname+"/public"));
 server.listen(port,function(){
   console.log("Listening on port",port);
 });
+app.use(connectHandler);
+app.use(tokenHandler);
 
-app.get("/",function(req,res,next){
+function connectHandler(req,res,next)
+{
   console.log("Authorizing...(1)");
   var scAuth = SC.getConnectUrl()+"display=popup";
   res.writeHead(301,{Location:scAuth});
   res.end();
   next();
-});
+}
+app.get("/",connectHandler);
 
-app.use(function(req,res){
+function tokenHandler(req,res){
   var code = req.query.code;
   SC.authorize(code,function(err,accessToken){
     if(err)
@@ -35,7 +39,7 @@ app.use(function(req,res){
     }
   });
   res.render("index.jade",{scripts:["js/ws.js"]});
-});
+}
 
 io.on("connection",function(socket){
   var user = new User(socket,"User");
