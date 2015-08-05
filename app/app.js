@@ -4,7 +4,7 @@ var server = require("http").Server(app);
 var io = require("socket.io")(server);
 var port = process.env.PORT||3000;
 var path = require("path");
-var SC = require("node-soundcloud");
+var SC = require("machinepack-soundcloud");
 var User = require("./user.js");
 
 app.set("view engine","jade");
@@ -14,31 +14,18 @@ server.listen(port,function(){
   console.log("Listening on port",port);
 });
 
-function connectHandler(req,res,next)
-{
-  console.log("Authorizing...(1)");
-  var scAuth = SC.getConnectUrl()+"&display=popup";
-  res.writeHead(301,{Location:scAuth});
-  res.end();
-  //next();
-}
-
-function tokenHandler(req,res)
-{
-  console.log(req.params);
-}
-
-io.on("connection",function(socket){
-  var user = new User(socket,"User");
-  console.log(user.getNickName(),"has connected.");
-});
-
-SC.init({
-  id:"34b370aa58ea274d0480fdd2fe51722a",
-  secret:"97708910783570592a82d0a37f462f57",
-  uri:"https://dry-tor-1298.herokuapp.com/"
-});
-
-app.get("/",function(req,res){
-  connectHandler(req,res,tokenHandler);
+SC.getLoginUrl({
+  clientId:"34b370aa58ea274d0480fdd2fe51722a",
+  callbackUrl:"localhost:5000/success",
+  display:"popup",
+  responseType:['code']
+})
+.exec({
+  error:function(err){
+    console.log(err);
+  },
+  success:function(data)
+  {
+    console.log(data);
+  }
 });
