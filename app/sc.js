@@ -14,7 +14,7 @@ var sc = (function(){
       }
       else
       {
-        console.log(resp.toJSON);
+        console.log(resp.toJSON());
       }
     });
   }
