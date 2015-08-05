@@ -6,22 +6,13 @@ var sc = (function(){
   var clientID = "34b370aa58ea274d0480fdd2fe51722a";
   var redirect = "http://127.0.0.1:5000/success";
   var responseType = "code";
-  function showAuthPopup()
+  function getConnectUrl()
   {
-    request.get(soundcloudUrl+"?client_id="+clientID+"&redirect_uri="+redirect+"&response_type="+responseType,function(err,resp){
-      if(err)
-      {
-        console.log(err);
-      }
-      else
-      {
-        console.log(resp.toJSON());
-      }
-    });
+    return soundcloudUrl+"?client_id="+clientID+"&redirect_uri="+redirect+"&response_type="+code;
   }
   
   return {
-    showAuthPopup:showAuthPopup
+    getConnectUrl:getConnectUrl
   };
 })();
 

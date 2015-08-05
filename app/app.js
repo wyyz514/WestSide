@@ -17,8 +17,9 @@ server.listen(port,function(){
 });
 
 app.get("/",function(req,res){
-  res.render("index",{scripts:["js/ws.js"]});
-  sc.showAuthPopup();
+  if(false)
+    res.writeHead(302,Location:sc.getConnectUrl());
+    res.end();
 });
 
 app.get("/success",function(req,res){
