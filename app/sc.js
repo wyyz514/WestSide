@@ -14,7 +14,7 @@ var sc = (function(){
       }
       else
       {
-        console.log(Object.keys(resp));
+        console.log(resp.toJSON);
       }
     });
   }
