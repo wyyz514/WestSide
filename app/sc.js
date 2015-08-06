@@ -47,7 +47,8 @@ var sc = (function(){
     
     req.write(oAuth_s);
     req.end();
-    
+  }
+  
   return {
     getConnectUrl:getConnectUrl,
     getToken:getToken
