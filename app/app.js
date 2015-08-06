@@ -32,7 +32,7 @@ app.get("/success",function(req,res){
       user.connection = socket;
       user.connection.emit("authenticated",{user:user});
     });
-    res.render("index");
+    res.render("index",{scripts:["js/ws.js"]});
   }
 
 });
