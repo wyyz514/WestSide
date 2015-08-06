@@ -15,23 +15,14 @@ User.prototype.getID = function()
   return this.connection.id;
 }
 
-User.prototype.getMe = function()
+User.prototype.extendSC = function(scObject)
 {
-  if(arguments[0] 
-     && typeof arguments[0] == "object")
-      extend(this,arguments[0]);
-  return this;
-}
-
-function extend(obj1,obj2)
-{
-  for(var prop in obj2)
-  {
-    if(obj2.hasOwnProperty(prop))
-    {
-      obj1[prop] = obj2[prop];
-    }
+  if(typeof scObject == 'object') {
+    for(var prop in scObject) {
+      if(scObject.hasOwnProperty(prop))
+        this[prop] = scObject[prop];
   }
+  return this;
 }
 
 module.exports = User;
