@@ -22,8 +22,8 @@ app.get("/",function(req,res){
 });
 
 app.get("/success",function(req,res){
-  if(req.params.code)
-    res.render("success",{code:req.params.code});
+  if(req.query.code)
+    res.render("success",{code:req.query.code});
   else
     res.render("success");
 });
