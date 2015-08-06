@@ -25,7 +25,7 @@ app.get("/success",function(req,res){
   
   if(req.query.code)
   {
-    res.render("index",{scripts:["/js/socket.io/socket.io.js","js/ws.js"]});
+    res.render("success",{scripts:["/js/socket.io/socket.io.js","js/ws.js"]});
   }
   var user = new User();
     user.nickname = "User";
