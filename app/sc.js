@@ -28,9 +28,8 @@ var sc = (function(){
     var qsString = qs.stringify(oAuth);
     var options = {
       hostname:consts.API,
-      path:consts.oAuth,
+      path:consts.oAuth+"?"+qsString,
       method:"POST",
-      qs:oAuth,
       headers:{
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
         'Content-Length': qsString.length
