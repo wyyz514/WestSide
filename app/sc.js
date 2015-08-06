@@ -23,7 +23,7 @@ var sc = (function(){
         grant_type:'authorization_code',
         client_secret:config.secret,
         code:code
-      },
+      }},
       function(err,response,body){
         if(err)
         {
