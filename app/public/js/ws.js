@@ -1,6 +1,6 @@
 window.addEventListener("load",function(){
   var socket = io();
-  socket.emit("connection");
-  
+  if(document.querySelector("input[type='hidden']").value)
+    socket.emit("authenticated");
 });
 

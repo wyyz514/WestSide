@@ -27,13 +27,14 @@ app.get("/success",function(req,res){
   user.authToken = req.query.code;
   if(req.query.code)
   {
-    res.render("success",{scripts:["/js/socket.io/socket.io.js","js/ws.js"]});
+    res.render("success",{scripts:["/js/socket.io/socket.io.js","js/ws.js"],token:req.query.code});
   }
-  io.on("connection",function(socket){
+});
+
+io.on("connection",function(socket){
     console.log("Got connection");
-    user.connection = socket;
-    user.connection.emit("authenticated",{authenticated:"true",nickname:user.getNickName()});
-  });
-  users.push(user);
-  console.log(users);
+    socket.on("authenticated",function(){
+      var user = new User(socket,"","","");
+      console.log(user);
+    });
 });
