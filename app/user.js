@@ -1,6 +1,6 @@
 function User(connection,code,nickname)
 {
-  this.connection = connection;
+  this.socket = connection;
   this.nickname = nickname;
   this.code = code;
 }

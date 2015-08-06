@@ -45,7 +45,7 @@ app.get("/success",function(req,res){
 io.on("connection",function(socket){
   console.log("Got connection");
   socket.on("authenticated",function(msg){
-    user.connection = socket;
+    user.socket = socket;
     user.code = msg.code;
     user.nickname = "Anon Y. Mous";
     SC.authorize(user.code,function(err,accessToken){
@@ -60,10 +60,19 @@ io.on("connection",function(socket){
     });
   });
   
-  socket.on("me",function(){
+  user.socket.on("me",function(){
     SC.get("/me?oauth_token="+user.token,function(err,data){
       var user2 = user.extendSC(data);
-      console.log(user2);
+      getFavs();
     });
   });
 });
+
+//------------------- END OF SETUP -------------------//
+function getFavs()
+{
+  var url = "/users/"+user.id+"/favorites";
+  SC.get(url,function(err,data){
+    console.log(data);
+  });
+}
