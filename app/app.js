@@ -60,12 +60,7 @@ io.on("connection",function(socket){
   
   socket.on("me",function(){
     SC.get("/me",function(err,data){
-      if(err)
-      {
-        socket.emit("you",{err:JSON.stringify(err)});
-      }
-      else
-        socket.emit("you",{you:JSON.stringify(data)});
+      console.log(data);
     });
   });
 });
