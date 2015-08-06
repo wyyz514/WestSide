@@ -13,7 +13,7 @@ var sc = (function(){
   
   function getConnectUrl()
   {
-    return config.soundcloudUrl+"?client_id="+config.clientID+"&redirect_uri="+config.redirect+"&response_type="+config.responseType;
+    return consts.soundcloudUrl+"?client_id="+consts.clientID+"&redirect_uri="+consts.redirect+"&response_type="+consts.responseType;
   }
   
   function getToken(code)
