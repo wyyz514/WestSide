@@ -54,12 +54,15 @@ io.on("connection",function(socket){
         console.log(err);
       }
       else
+      {
         user.token = accessToken;
+        users.push(user);
+      }
     });
   });
   
   socket.on("me",function(){
-    SC.get("/me",function(err,data){
+    SC.get("/me?oauth_token="+users.pop().token,function(err,data){
       console.log(data);
     });
   });
