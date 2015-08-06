@@ -22,7 +22,7 @@ server.listen(port,function(){
 SC.init({
   id:"34b370aa58ea274d0480fdd2fe51722a",
   secret:"97708910783570592a82d0a37f462f57",
-  redirect:"http://127.0.0.1/success"
+  redirect:"http://127.0.0.1:5000/success"
 });
 //request handlers
 app.get("/",function(req,res){
