@@ -11,7 +11,7 @@ window.addEventListener("load",function(){
   });
   
   socket.on("you",function(msg){
-    var details = JSON.parse(msg.you);
+    var details = msg.you;
     document.body.innerHTML += details;
   });
 });
