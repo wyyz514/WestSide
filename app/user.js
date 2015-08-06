@@ -19,7 +19,7 @@ User.prototype.getMe = function()
 {
   if(arguments[0] 
      && typeof arguments[0] == "object")
-    this = extend(this,arguments[0]);
+      extend(this,arguments[0]);
   return this;
 }
 
@@ -32,7 +32,6 @@ function extend(obj1,obj2)
       obj1[prop] = obj2[prop];
     }
   }
-  return obj1;
 }
 
 module.exports = User;
