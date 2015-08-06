@@ -27,7 +27,7 @@ app.get("/success",function(req,res){
   {
     var user = new User();
     user.nickname = "User";
-    user.authToken = res.query.code;
+    user.authToken = req.query.code;
     io.on("connection",function(socket){
       user.connection = socket;
       user.connection.emit("authenticated",{user:user});
