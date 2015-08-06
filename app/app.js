@@ -48,15 +48,16 @@ io.on("connection",function(socket){
   console.log("Got connection");
   socket.on("authenticated",function(msg){
     user = new User(socket,msg.code,"User","");
+    SC.authorize(user.code,function(err,accessToken){
+      if(err)
+      {
+        console.log(err);
+      }
+      else
+        user.token = accessToken;
+    });
   });
-  SC.authorize(user.code,function(err,accessToken){
-    if(err)
-    {
-      console.log(err);
-    }
-    else
-      user.token = accessToken;
-  });
+  
   socket.on("me",function(){
     SC.get("/me",function(err,data){
       if(err)
