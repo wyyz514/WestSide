@@ -60,7 +60,6 @@ io.on("connection",function(socket){
   });
   
   socket.on("me",function(){
-    console.log(users);
     SC.get("/me?oauth_token="+user.token,function(err,data){
       console.log(data);
     });
