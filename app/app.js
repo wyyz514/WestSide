@@ -30,7 +30,7 @@ app.get("/success",function(req,res){
     user.authToken = req.query.code;
     io.on("connection",function(socket){
       user.connection = socket;
-      user.connection.emit("authenticated",{user:user});
+      socket.emit("authenticated",{user:user});
     });
     res.render("index",{scripts:["js/ws.js"]});
   }
