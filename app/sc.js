@@ -20,7 +20,7 @@ var sc = (function(){
       form:{
         client_id:config.clientID,
         redirect_uri:config.redirect,
-        grant_type:'authorization_code',
+        grant_type:authorization_code,
         client_secret:config.secret,
         code:code
       }},
