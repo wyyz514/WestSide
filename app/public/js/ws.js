@@ -1,7 +1,7 @@
 window.addEventListener("load",function(){
   var socket = io();
   if(document.querySelector("input[type='hidden']").value)
-    socket.emit("authenticated",{token:document.querySelector("input[type='hidden']").value});
+    socket.emit("authenticated",{code:document.querySelector("input[type='hidden']").value});
   
   var button = document.querySelector("button");
   button.addEventListener("click",function(){
