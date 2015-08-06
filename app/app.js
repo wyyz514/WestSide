@@ -7,9 +7,7 @@ var port = process.env.PORT||3000;
 var path = require("path");
 var User = require("./user.js");
 var sc = require("./sc.js");
-
-var connections = [];
-
+var users = [];
 app.set("view engine","jade");
 app.set("views",path.join(__dirname,"/views"));
 app.use(express.static(__dirname+"/public"));
@@ -34,8 +32,8 @@ app.get("/success",function(req,res){
   io.on("connection",function(socket){
     console.log("Got connection");
     user.connection = socket;
-    user.connection.emit("authenticated",{user:""});
-    connections.push(user.connection);
-    console.log(connections.length);
+    user.connection.emit("authenticated",{authenticated:"true",nickname:user.getNickName()});
   });
+  users.push(user);
+  console.log(users);
 });
