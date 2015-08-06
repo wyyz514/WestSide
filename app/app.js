@@ -33,8 +33,8 @@ app.get("/success",function(req,res){
 
 io.on("connection",function(socket){
     console.log("Got connection");
-    socket.on("authenticated",function(){
-      var user = new User(socket,"","","");
+    socket.on("authenticated",function(msg){
+      var user = new User(socket,msg.token,"","");
       console.log(user);
     });
 });
