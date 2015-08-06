@@ -38,10 +38,10 @@ io.on("connection",function(socket){
   var user;
   console.log("Got connection");
   socket.on("authenticated",function(msg){
-    user = new User(socket,msg.token,"User","");
+    user = new User(socket,"","User","");
   });
   
   socket.on("me",function(){
-    sc.makeRequest(user.authToken);
+    sc.getToken(user.code);
   });
 });

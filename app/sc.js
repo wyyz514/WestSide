@@ -1,13 +1,41 @@
 var request = require("request");
 var sc = (function(){
-  var soundcloudUrl = "https://soundcloud.com/connect";
-  var clientID = "34b370aa58ea274d0480fdd2fe51722a";
-  var redirect = "http://127.0.0.1:5000/success";
-  var responseType = "code";
-
+  var config = {
+    soundcloudUrl:"https://soundcloud.com/connect",
+    clientID:"34b370aa58ea274d0480fdd2fe51722a",
+    redirect:"http://127.0.0.1:5000/success",
+    responseType:"code",
+    oAuth:"https://api.soundcloud.com/oauth2/token",
+    secret:"97708910783570592a82d0a37f462f57"
+  }
+  
   function getConnectUrl()
   {
-    return soundcloudUrl+"?client_id="+clientID+"&redirect_uri="+redirect+"&response_type="+responseType;
+    return config.soundcloudUrl+"?client_id="+config.clientID+"&redirect_uri="+config.redirect+"&response_type="+config.responseType;
+  }
+  
+  function getToken(code)
+  {
+  request.post(config.oAuth,{
+      form:{
+        client_id:config.clientID,
+        redirect_uri:config.redirect,
+        grant_type:'authorization_code',
+        client_secret:config.secret,
+        code:code
+      },
+      function(err,response,body){
+        if(err)
+        {
+          console.log(err);
+        }
+        else
+        {
+          console.log(response);
+        }
+      }
+    });
+      
   }
   
   function makeRequest(token)
@@ -27,6 +55,7 @@ var sc = (function(){
   
   return {
     getConnectUrl:getConnectUrl,
+    getToken:getToken,
     makeRequest:makeRequest
   };
 })();

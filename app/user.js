@@ -1,9 +1,9 @@
-function User(connection,authToken,nickname,scId)
+function User(connection,code,nickname,scId)
 {
   this.connection = connection;
   this.nickname = nickname;
   this.scId = scId;
-  this.authToken = authToken;
+  this.code = code;
 }
 
 User.prototype.getNickName = function()
