@@ -27,7 +27,7 @@ var sc = (function(){
       function(err,response,body){
         if(err)
         {
-          console.log(err);
+          console.log(error.body);
         }
         else
         {
