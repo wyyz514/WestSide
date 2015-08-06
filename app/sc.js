@@ -25,12 +25,16 @@ var sc = (function(){
       client_secret:consts.secret,
       grant_type:'authorization_code'
     }
-    
+    var qsString = qs.stringify(oAuth);
     var options = {
       hostname:consts.API,
       path:consts.oAuth,
       method:"POST",
-      qs:oAuth
+      qs:oAuth,
+      headers:{
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        'Content-Length': qsString.length
+      }
     };
     
     var req = https.request(oAuth,function(res){
