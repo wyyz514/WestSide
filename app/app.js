@@ -32,6 +32,6 @@ app.get("/success",function(req,res){
   io.on("connection",function(socket){
     console.log("Got connection");
     user.connection = socket;
-    socket.emit("authenticated",{user:user});
+    socket.emit("authenticated",{user:""});
   });
 });
