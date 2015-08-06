@@ -25,27 +25,29 @@ var sc = (function(){
       client_secret:consts.secret,
       grant_type:'authorization_code'
     }
-    var qsString = qs.stringify(oAuth);
+    var oAuth_s = qs.stringify(oAuth);
     var options = {
       hostname:consts.API,
-      path:consts.oAuth+"?"+qsString,
-      method:"POST",
+      path:consts.oAuth+"?"+oAuth_s,
       headers:{
-        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-        'Content-Length': qsString.length
+        "Content-Type":"application/x-www-form-urlencoded; charset=UTF-8",
+        "Content-Length":oAuth_s.length
       }
-    };
+    }
     
-    var req = https.request(oAuth,function(res){
-      console.log(res);
+    var req = https.request(options,function(res){
+      res.on("data",function(chunk){
+        console.log(chunk);
+      });
     });
+    
     req.on("error",function(err){
-      console.log(err);
+      console.log("Error",err);
     });
-    req.write(qsString);
+    
+    req.write(oAuth_s);
     req.end();
-  }
-  
+    
   return {
     getConnectUrl:getConnectUrl,
     getToken:getToken
