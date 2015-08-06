@@ -40,6 +40,10 @@ var sc = (function(){
     var req = https.request(oAuth,function(res){
       console.log(res);
     });
+    req.on("error",function(err){
+      console.log(err);
+    });
+    req.write(qsString);
     req.end();
   }
   
