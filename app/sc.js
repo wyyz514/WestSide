@@ -16,7 +16,7 @@ var sc = (function(){
   
   function getToken(code)
   {
-  request.post(config.oAuth,{
+  request.post({url:config.oAuth,
       form:{
         client_id:config.clientID,
         redirect_uri:config.redirect,
