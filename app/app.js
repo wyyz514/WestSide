@@ -8,7 +8,7 @@ var port = process.env.PORT||3000;
 var path = require("path");
 var SC = require("node-soundcloud");
 var User = require("./user.js");
-
+var user;
 //express config
 app.set("view engine","jade");
 app.set("views",path.join(__dirname,"/views"));
@@ -43,7 +43,6 @@ app.get("/success",function(req,res){
 });
 //user initialization
 io.on("connection",function(socket){
-  var user;
   console.log("Got connection");
   socket.on("authenticated",function(msg){
     user = new User(socket,msg.code,"User","");
