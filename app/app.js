@@ -7,7 +7,7 @@ var io = require("socket.io")(server);
 var port = process.env.PORT||3000;
 var path = require("path");
 var User = require("./user.js");
-var sc = require("./sc.js");
+
 var users = [];
 
 //express config
