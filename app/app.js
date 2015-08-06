@@ -65,7 +65,7 @@ io.on("connection",function(socket){
         socket.emit("you",{err:JSON.stringify(err)});
       }
       else
-        socket.emit("you",{you:JSON.stringify(user)});
+        socket.emit("you",{you:JSON.stringify(data)});
     });
   });
 });
