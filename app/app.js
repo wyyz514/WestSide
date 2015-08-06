@@ -22,8 +22,17 @@ app.get("/",function(req,res){
 });
 
 app.get("/success",function(req,res){
+  
   if(req.query.code)
-    res.render("success",{code:req.query.code});
-  else
-    res.render("success");
+  {
+    var user = new User();
+    user.nickname = "User";
+    user.authToken = res.query.code;
+    io.on("connection",function(socket){
+      user.connection = socket;
+      user.connection.emit("authenticated",{user:user});
+    });
+    res.render("index");
+  }
+
 });

@@ -12,6 +12,20 @@ var sc = (function(){
     return soundcloudUrl+"?client_id="+clientID+"&redirect_uri="+redirect+"&response_type="+responseType;
   }
   
+  function makeRequest(url)
+  {
+    request.get(url,function(err,data){
+      if(err)
+      {
+        console.log(err);
+      }
+      else
+      {
+        console.log(data);
+      }
+    });
+  }
+  
   return {
     getConnectUrl:getConnectUrl
   };

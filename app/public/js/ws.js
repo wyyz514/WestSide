@@ -1,3 +1,4 @@
 var socket = io();
-socket.emit("connection");
-console.log("test");
+socket.on("authenticated",function(msg){
+  console.log(msg.user);
+});
