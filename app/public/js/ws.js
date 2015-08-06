@@ -1,4 +1,4 @@
-var socket = io.connect("127.0.0.1:5000/success");
+var socket = io.connect("http://localhost");
 socket.emit("connection");
 socket.on("authenticated",function(msg){
   console.log(msg.user);
