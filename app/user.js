@@ -21,8 +21,9 @@ User.prototype.extendSC = function(scObject)
     for(var prop in scObject) {
       if(scObject.hasOwnProperty(prop))
         this[prop] = scObject[prop];
-  }
+    }
   return this;
+  }
 }
 
 module.exports = User;
