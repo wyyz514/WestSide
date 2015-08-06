@@ -25,14 +25,13 @@ app.get("/success",function(req,res){
   
   if(req.query.code)
   {
-    var user = new User();
+    res.render("index",{scripts:["/js/socket.io/socket.io.js","js/ws.js"]});
+  }
+  var user = new User();
     user.nickname = "User";
     user.authToken = req.query.code;
     io.on("connection",function(socket){
       user.connection = socket;
       socket.emit("authenticated",{user:user});
     });
-    res.render("index",{scripts:["/js/socket.io/socket.io.js","js/ws.js"]});
-  }
-
 });
