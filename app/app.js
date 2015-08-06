@@ -62,7 +62,7 @@ io.on("connection",function(socket){
     SC.get("/me",function(err,data){
       if(err)
       {
-        socket.emit("you",{err:err});
+        socket.emit("you",{err:JSON.stringify(err)});
       }
       else
         socket.emit("you",{you:JSON.stringify(user)});
