@@ -29,10 +29,9 @@ app.get("/success",function(req,res){
   {
     res.render("success",{scripts:["/js/socket.io/socket.io.js","js/ws.js"]});
   }
-});
-
-io.on("connection",function(socket){
-  console.log("Got connection");
-  user.connection = socket;
-  socket.emit("authenticated",{user:user});
+  io.on("connection",function(socket){
+    console.log("Got connection");
+    user.connection = socket;
+    socket.emit("authenticated",{user:user});
+  });
 });
