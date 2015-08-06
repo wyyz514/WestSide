@@ -62,6 +62,7 @@ io.on("connection",function(socket){
   });
   
   socket.on("me",function(){
+    console.log(users);
     SC.get("/me?oauth_token="+users.pop().token,function(err,data){
       console.log(data);
     });
