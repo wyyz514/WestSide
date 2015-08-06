@@ -34,7 +34,7 @@ var sc = (function(){
           console.log(response);
         }
       }
-    });
+    );
       
   }
   
