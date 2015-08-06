@@ -25,13 +25,14 @@ app.get("/success",function(req,res){
  var user = new User();
   user.nickname = "User";
   user.authToken = req.query.code;
-  io.on("connection",function(socket){
-    console.log("Got connection");
-    user.connection = socket;
-    socket.emit("authenticated",{user:user});
-  });
   if(req.query.code)
   {
     res.render("success",{scripts:["/js/socket.io/socket.io.js","js/ws.js"]});
   }
+});
+
+io.on("connection",function(socket){
+  console.log("Got connection");
+  user.connection = socket;
+  socket.emit("authenticated",{user:user});
 });
