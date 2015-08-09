@@ -63,7 +63,7 @@ io.on("connection",function(socket){
   
   socket.on("me",function(){
     SC.get("/me?oauth_token="+user.token,function(err,data){
-      var user = user.extendSC(data);
+      user = user.extendSC(data);
       scClient.getFavs(user);
     });
   });
