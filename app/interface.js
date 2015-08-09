@@ -1,6 +1,6 @@
 var SC = require("node-soundcloud");
 var q = require("q");
-var scClient = (function(){
+var client = (function(){
   var favsCache = [];
   
   function getFavs(user)
@@ -28,4 +28,4 @@ var scClient = (function(){
 })(); 
 
 
-module.exports = scClient;
+module.exports = client;

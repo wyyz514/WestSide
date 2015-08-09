@@ -8,8 +8,10 @@ var port = process.env.PORT||3000;
 var path = require("path");
 var SC = require("node-soundcloud");
 var User = require("./user.js");
-var scClient = require("./interface.js");
+var client = require("./interface.js");
+var QueueManager = require("./queue.js");
 var user = new User();
+var songQueue = new QueueManager();
 //express config
 app.set("view engine","jade");
 app.set("views",path.join(__dirname,"/views"));
@@ -37,7 +39,6 @@ app.get("/success",function(req,res){
     res
     .render("success",
       {
-        scripts:["js/ws.js"],
         token:req.query.code
       }
     );
@@ -50,33 +51,33 @@ app.get("/success",function(req,res){
     else
     {
       user.token = accessToken;
+      SC.get("/me?oauth_token="+user.token,function(err,data){
+        console.log("User token: ",user.token);
+        user = user.extendSC(data);
+        client.getFavs(user).then(function(favs){
+          user.favs = favs;
+        });
+      });
     }
   });
 });
 //user initialization
 io.on("connection",function(socket){
   console.log("Got connection");
-  socket.on("songs?",function(msg){
+  socket.on("authed",function(){
     console.log("Authed");
     user.socket = socket;
-    //user.code = msg.code;
-    user.nickname = "Anon Y. Mous";
-    SC.get("/me?oauth_token="+user.token,function(err,data){
-      console.log("User token: ",user.token);
-      user = user.extendSC(data);
-      scClient.getFavs(user).then(function(favs){
-        var _favs = JSON.stringify(favs);
-        socket.emit("songs",{songs:_favs});
-        });
-    });
+    user.nickname = "Anon Y. Mous";   
+  });
+  
+  socket.on("queue",function(msg){
+    songQueue.enqueue(msg.song);
   });
 });
 
 //------------------- END OF SETUP -------------------//
 
 app.get("/app",function(req,res){
-  res.render("app",{
-    scripts:["/js/socket.io/socket.io.js","js/client.js"],
-  });
+  res.render("app",{favs:user.favs});
   
 });
