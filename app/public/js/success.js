@@ -1,4 +1,8 @@
 window.addEventListener("load",function(){
-  location.href = "/app";
+  var button = document.querySelector("button");
+  button.addEventListener("click",function(){
+    if(document.querySelector("input[type='hidden']").value)
+      location.href = "/app";
+  });
 });
 
