@@ -61,10 +61,14 @@ io.on("connection",function(socket){
     });
   });
   
-  socket.on("me",function(){
+  app.get("/app",function(req,res){
+    res.render("app");
     SC.get("/me?oauth_token="+user.token,function(err,data){
       user = user.extendSC(data);
-      scClient.getFavs(user);
+      scClient.getFavs(user).then(function(favs){
+        var _favs = JSON.stringify(favs);
+        socket.emit("songs",{songs:_favs});
+      });
     });
   });
 });
