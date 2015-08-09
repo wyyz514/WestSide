@@ -78,6 +78,5 @@ io.on("connection",function(socket){
 //------------------- END OF SETUP -------------------//
 
 app.get("/app",function(req,res){
-  console.log(Object.keys(user));
   res.render("app",{favs:user.favs});
 });
