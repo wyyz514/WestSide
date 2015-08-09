@@ -33,44 +33,50 @@ app.get("/",function(req,res){
 app.get("/success",function(req,res){
   if(req.query.code)
   {
+    user.code = req.query.code;
     res
     .render("success",
       {
-        scripts:["/js/socket.io/socket.io.js","js/ws.js"],
+        scripts:["js/ws.js"],
         token:req.query.code
       }
     );
   }
+ SC.authorize(user.code,function(err,accessToken){
+    if(err)
+    {
+      console.log(err);
+    }
+    else
+    {
+      user.token = accessToken;
+    }
+  });
 });
 //user initialization
 io.on("connection",function(socket){
   console.log("Got connection");
-  socket.on("authenticated",function(msg){
+  socket.on("songs?",function(msg){
+    console.log("Authed");
     user.socket = socket;
-    user.code = msg.code;
+    //user.code = msg.code;
     user.nickname = "Anon Y. Mous";
-    SC.authorize(user.code,function(err,accessToken){
-      if(err)
-      {
-        console.log(err);
-      }
-      else
-      {
-        user.token = accessToken;
-      }
-    });
-  });
-  
-  app.get("/app",function(req,res){
-    res.render("app");
     SC.get("/me?oauth_token="+user.token,function(err,data){
+      console.log("User token: ",user.token);
       user = user.extendSC(data);
       scClient.getFavs(user).then(function(favs){
         var _favs = JSON.stringify(favs);
         socket.emit("songs",{songs:_favs});
-      });
+        });
     });
   });
 });
 
 //------------------- END OF SETUP -------------------//
+
+app.get("/app",function(req,res){
+  res.render("app",{
+    scripts:["/js/socket.io/socket.io.js","js/client.js"],
+  });
+  
+});

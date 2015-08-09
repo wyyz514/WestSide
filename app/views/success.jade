@@ -2,10 +2,10 @@ extends index
 block title
   title="Success"
 body 
-block scripts
-  each script in scripts
-    script(src=script)
 block content
   h1="Auth successful"
   input(type="hidden" value=token)
   button="Load me"
+block scripts
+  each script in scripts
+    script(src=script)
