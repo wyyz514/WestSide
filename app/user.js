@@ -17,7 +17,7 @@ User.prototype.getID = function()
 
 User.prototype.extendSC = function(scObject)
 {
-  if(typeof scObject == 'object') {
+  if(typeof scObject === 'object') {
     for(var prop in scObject) {
       if(scObject.hasOwnProperty(prop))
         this[prop] = scObject[prop];

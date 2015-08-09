@@ -8,6 +8,7 @@ var port = process.env.PORT||3000;
 var path = require("path");
 var SC = require("node-soundcloud");
 var User = require("./user.js");
+var scClient = require("./interface.js");
 var user = new User();
 //express config
 app.set("view engine","jade");
@@ -63,16 +64,9 @@ io.on("connection",function(socket){
   socket.on("me",function(){
     SC.get("/me?oauth_token="+user.token,function(err,data){
       var user2 = user.extendSC(data);
-      getFavs();
+      scClient.getFavs();
     });
   });
 });
 
 //------------------- END OF SETUP -------------------//
-function getFavs()
-{
-  var url = "/users/"+user.id+"/favorites";
-  SC.get(url,function(err,data){
-    console.log(data);
-  });
-}

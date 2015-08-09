@@ -9,10 +9,6 @@ window.addEventListener("load",function(){
   button.addEventListener("click",function(){
     socket.emit("me");
   });
-  
-  socket.on("you",function(msg){
-    var details = msg.you;
-    document.body.innerHTML += details;
-  });
+ 
 });
 
