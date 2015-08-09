@@ -3,7 +3,7 @@ var SC = require("node-soundcloud");
 var scClient = (function(){
   var favsCache = [];
   
-  function getFavs()
+  function getFavs(user)
   {
     if(!favsCache)
     {
