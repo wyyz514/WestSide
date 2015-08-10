@@ -17,12 +17,17 @@ block content
         div(class="ws-song-row")
           div(class="ws-song-avatar")
             img(src=fav.artwork_url||fav.user.avatar_url)
-          div(class="ws-song-info")
+          div(class="ws-song-info" data-ws-href=fav.permalink_url)
             ul
               li(class="ws-song-title")=fav.title
               li(class="ws-song-artist")=fav.user.username
 
         div(class="ws-divider")
+    div(id="ws-footer")
+      div(id="ws-nwpl")
+        div(id="ws-np-text")= "Now Playing"
+        div(id="ws-current-track")= "Nothing is being played."
+      div(id="ws-queue")
   script(src="js/socket.io/socket.io.js")
   script(src="js/client.js")
   
