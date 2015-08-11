@@ -77,7 +77,7 @@ io.on("connection",function(socket){
   socket.on("queue",function(msg){
     var song = JSON.parse(msg.song);
     songQueue.enqueue(song);
-    this.emit("updated-q",{queue:JSON.stringify(songQueue.getQueue())});
+    this.broadcast.emit("updated-q",{queue:JSON.stringify(songQueue.getQueue())});
   });
 });
 

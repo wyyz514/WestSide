@@ -7,7 +7,6 @@ window.addEventListener("load",function(){
   });
   
   socket.on("sync",function(msg){
-    console.log("Syncing");
     var queue = JSON.parse(msg.queue);
     console.log(queue);
     ClientManager.syncQueue(queue);
@@ -54,6 +53,7 @@ window.addEventListener("load",function(){
     
     function syncQueue(queue)
     {
+      console.log("Syncing");
       var checkIcons = document.querySelectorAll(".ws-song-status-icon#ws-song-added i");
       Array.prototype.forEach.call(checkIcons,function(el){
         el.style.display = "none";
@@ -82,6 +82,14 @@ window.addEventListener("load",function(){
           });
         });
       },false);
+      
+      var footer = document.querySelector("#ws-footer");
+      footer.addEventListener("click",function(){
+        if(this.classList.contains("ws-queue-active"))
+          this.classList.remove("ws-queue-active");
+        else
+          this.classList.add("ws-queue-active");
+      });
     }
     
     return {
