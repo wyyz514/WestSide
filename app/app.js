@@ -68,11 +68,16 @@ io.on("connection",function(socket){
   socket.on("authed",function(){
     console.log("Authed");
     user.socket = socket;
-    user.nickname = "Anon Y. Mous";   
+    user.nickname = "Anon Y. Mous"; 
+    if(songQueue)
+    {
+      socket.emit("sync",{queue:JSON.stringify(songQueue.getQueue())});
+    }
   });
-  
   socket.on("queue",function(msg){
-    songQueue.enqueue(msg.song);
+    var song = JSON.parse(msg.song);
+    songQueue.enqueue(song);
+    this.emit("updated-q",{queue:JSON.stringify(songQueue.getQueue())});
   });
 });
 

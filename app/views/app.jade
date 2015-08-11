@@ -15,7 +15,7 @@ block content
   div(id="ws-container")
     div(id="ws-songs")
       each fav in favs
-        div(class="ws-song-row")
+        div(class="ws-song-row" data-ws-id=fav.id)
           div(class="ws-song-avatar")
             img(src=fav.artwork_url||fav.user.avatar_url)
           div(class="ws-song-info" data-ws-href=fav.permalink_url)

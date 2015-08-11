@@ -18,4 +18,8 @@ QueueManager.prototype.dequeue = function()
     console.log("Queue is empty");
 }
 
+QueueManager.prototype.getQueue = function(){
+  return this.queue;
+}
+
 module.exports = QueueManager;

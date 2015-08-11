@@ -1,16 +1,29 @@
 window.addEventListener("load",function(){
   var socket = io();
   socket.emit("authed");
+  socket.on("updated-q",function(msg){
+    var queue = JSON.parse(msg.queue);
+    ClientManager.syncQueue(queue);
+  });
+  
+  socket.on("sync",function(msg){
+    console.log("Syncing");
+    var queue = JSON.parse(msg.queue);
+    console.log(queue);
+    ClientManager.syncQueue(queue);
+  });
   
   var ClientManager = (function(socket){
     
     function queueSong(event){
       var promise = new Promise(function(resolve,reject){
         var target = event.target;
-        var song;
+        var song = {};
         if(target.hasAttribute("data-ws-href"))
         {
-          song = target.getAttribute("data-ws-href");
+          song.link = target.getAttribute("data-ws-href");
+          song.title = target.querySelector(".ws-song-info .ws-song-title").innerText;
+          song.id = target.parentElement.getAttribute("data-ws-id");
           resolve(song);
         }
         else
@@ -22,17 +35,37 @@ window.addEventListener("load",function(){
             {
               parent = parent.parentElement;
             }
-            song = parent.querySelector(".ws-song-info").getAttribute("data-ws-href");
+            song.link = parent.querySelector(".ws-song-info").getAttribute("data-ws-href");
+            song.title = parent.querySelector(".ws-song-title").innerText;
+            song.id = parent.getAttribute("data-ws-id");
             resolve(song);
           }
           else
           {
-            song = target.querySelector(".ws-song-info").getAttribute("ws-song-href");
+            song.link = target.querySelector(".ws-song-info").getAttribute("data-ws-href");
+            song.title = target.querySelector(".ws-song-title").innerText;
+            song.id = target.getAttribute("data-ws-id");
             resolve(song);
           }
         }
       });
       return promise;
+    }
+    
+    function syncQueue(queue)
+    {
+      var checkIcons = document.querySelectorAll(".ws-song-status-icon#ws-song-added i");
+      Array.prototype.forEach.call(checkIcons,function(el){
+        el.style.display = "none";
+      });
+      
+      queue.forEach(function(song){
+        var songRow = document.querySelector("div[data-ws-id="+"'"+song.id+"'"+"]");
+        if(songRow)
+        {
+          songRow.querySelector(".ws-song-status-icon#ws-song-added i").style.display = "inline-block";
+        }
+      });
     }
     
     function initListeners()
@@ -42,7 +75,8 @@ window.addEventListener("load",function(){
         row.addEventListener("click",function(ev){
           queueSong(ev).then(function(song){
             console.log(song);
-            socket.emit("queue",{song:song});
+            var _song = JSON.stringify(song);
+            socket.emit("queue",{song:_song});
             var added = row.querySelector("div.ws-song-status-icon#ws-song-added i");
             added.style.display = "inline-block";
           });
@@ -51,7 +85,8 @@ window.addEventListener("load",function(){
     }
     
     return {
-      initListeners:initListeners
+      initListeners:initListeners,
+      syncQueue:syncQueue
     }
   })(socket);
   
