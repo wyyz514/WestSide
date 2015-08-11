@@ -6,6 +6,7 @@ block title
   title="WestSide App"
   link(rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400:700")
   link(rel="stylesheet" type="text/css" href="css/client.css")
+  link(rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css")
 body
 block content
   div(id="ws-header")
@@ -21,7 +22,11 @@ block content
             ul
               li(class="ws-song-title")=fav.title
               li(class="ws-song-artist")=fav.user.username
-
+          div(class="ws-song-status")
+            div(class="ws-song-status-icon" id="ws-song-added")
+              i(class="ion-ios-checkmark" style="color:#2cc185;")
+            div(class="ws-song-status-icon" id="ws-song-playing")
+              i(class="ion-ios-play-outline" style="color:#ff5500")
         div(class="ws-divider")
     div(id="ws-footer")
       div(id="ws-nwpl")

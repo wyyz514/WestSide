@@ -61,6 +61,8 @@ body
   width:100%;
   height:6em;
   display:block;
+  position:relative;
+  cursor:pointer;
 }
 
 .ws-song-row>div
@@ -92,7 +94,7 @@ body
   -webkit-box-sizing:border-box;
   box-sizing:border-box;
   padding:5px;
-  width:calc(100vw - 7em);
+  width:calc(100vw - 11em);
   -webkit-display:flex;
   display:flex;
   align-items:center;
@@ -185,4 +187,27 @@ body
   height:calc(100vh - 6em);
   background-color:#444;
   overflow:auto;
+}
+
+.ws-song-status
+{
+
+  z-index:100;
+  top:0;
+  height:100%;
+  width:4em;
+}
+
+.ws-song-status-icon
+{
+  width:2em;
+  display:inline-block;
+  text-align:right;
+  line-height:6em;
+}
+
+.ws-song-status-icon i
+{
+  font-size:1.3em;
+  display:none;
 }
