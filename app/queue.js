@@ -1,12 +1,17 @@
 function QueueManager()
 {
   this.queue = [];
+  this.song_ids = [];
 }
 
 QueueManager.prototype.enqueue = function(item)
 {
-  if(this.queue.indexOf(item) < 0)
+  
+  if(this.song_ids.indexOf(item.id) < 0)
+  {
+    this.song_ids.push(item.id);
     this.queue.unshift(item);
+  }
   console.log(this.queue.length);
 };
 

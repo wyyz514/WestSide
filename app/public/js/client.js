@@ -1,15 +1,13 @@
 window.addEventListener("load",function(){
+  var queue = [];
   var socket = io();
-  socket.emit("authed");
-  socket.on("updated-q",function(msg){
-    var queue = JSON.parse(msg.queue);
-    ClientManager.syncQueue(queue);
-  });
-  
+  socket.emit("authed");  
   socket.on("sync",function(msg){
+    console.log("Sync received");
     var queue = JSON.parse(msg.queue);
     console.log(queue);
     ClientManager.syncQueue(queue);
+    ClientManager.updateQueue(queue);
   });
   
   var ClientManager = (function(socket){
@@ -68,6 +66,63 @@ window.addEventListener("load",function(){
       });
     }
     
+    function updateQueue(queue)
+    {
+      var queueSize = queue.length;
+      var first = queue[queueSize - 1];
+      var last = queue[0];
+      var marker = 0;
+      var elQueue = document.querySelector("#ws-queue");
+      var elFirst = elQueue.firstElementChild;
+      var elLast = elQueue.lastElementChild;
+      if(elQueue.childElementCount > 0)
+      {
+        while(elFirst.getAttribute("data-ws-id") !== first.id)
+        {
+          console.log("Removing:",elFirst);
+          elQueue.removeChild(elFirst);
+          elFirst = elQueue.firstElementChild;
+        }
+        
+        while(marker < queueSize 
+              && queue[marker].id !== elLast.getAttribute("data-ws-id"))
+        {
+          marker++;
+        }
+        for(var index = marker - 1; index >= 0; index--)
+        {
+          renderRow(queue[index]);
+        }
+      }
+      else
+      {
+        console.log("No songs in queue. Adding songs");
+        for(var index = queueSize - 1; index >= 0; index--)
+        {
+          renderRow(queue[index]);
+        }
+      }
+    }
+    
+    function renderRow(song)
+    {
+      console.log("Rendering queue");
+      var parent = document.querySelector("#ws-queue");
+      var queueRow = document.createElement("div");
+      var queueSong = document.createElement("div");
+      var queueSongArtist = document.createElement("div");
+      queueRow.classList.add("ws-queue-row");
+      queueRow.setAttribute("data-ws-id",song.id);
+      queueSong.classList.add("ws-queue-song");
+      queueSongArtist.classList.add("ws-queue-song-artist");
+
+      queueSong.innerText = song.title;
+      //queueSongArtist.innerText = song.artist;
+      parent.appendChild(queueRow);
+      queueRow.appendChild(queueSong);
+      queueRow.appendChild(queueSongArtist);
+    }
+    
     function initListeners()
     {
       var rows = document.querySelectorAll("div.ws-song-row");
@@ -94,7 +149,8 @@ window.addEventListener("load",function(){
     
     return {
       initListeners:initListeners,
-      syncQueue:syncQueue
+      syncQueue:syncQueue,
+      updateQueue:updateQueue
     }
   })(socket);
   
