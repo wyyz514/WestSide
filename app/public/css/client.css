@@ -185,7 +185,7 @@ body
 {
   width:100%;
   height:calc(100vh - 6em);
-  background-color:#333;
+  background-color:#222;
   overflow:auto;
 }
 

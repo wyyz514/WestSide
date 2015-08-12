@@ -12,39 +12,29 @@ window.addEventListener("load",function(){
   
   var ClientManager = (function(socket){
     
+    function extractSongDetails(target)
+    {
+      var _target = target;
+      var song = {};
+      while(!_target.classList.contains("ws-song-row"))
+      {
+        _target = _target.parentElement;
+      }
+      
+      song.link = _target.querySelector(".ws-song-info").getAttribute("data-ws-href");
+      song.title = target.querySelector(".ws-song-info .ws-song-title").innerText;
+      song.id = _target.getAttribute("data-ws-id");
+      song.img = _target.querySelector(".ws-song-avatar img").getAttribute("src");
+      song.artist = _target.querySelector(".ws-song-artist").innerText;
+      
+      return song;
+    }
+    
     function queueSong(event){
       var promise = new Promise(function(resolve,reject){
         var target = event.target;
-        var song = {};
-        if(target.hasAttribute("data-ws-href"))
-        {
-          song.link = target.getAttribute("data-ws-href");
-          song.title = target.querySelector(".ws-song-info .ws-song-title").innerText;
-          song.id = target.parentElement.getAttribute("data-ws-id");
-          resolve(song);
-        }
-        else
-        {
-          if(!target.classList.contains("ws-song-row"))
-          {
-            var parent = target.parentElement;
-            while(!parent.classList.contains("ws-song-row"))
-            {
-              parent = parent.parentElement;
-            }
-            song.link = parent.querySelector(".ws-song-info").getAttribute("data-ws-href");
-            song.title = parent.querySelector(".ws-song-title").innerText;
-            song.id = parent.getAttribute("data-ws-id");
-            resolve(song);
-          }
-          else
-          {
-            song.link = target.querySelector(".ws-song-info").getAttribute("data-ws-href");
-            song.title = target.querySelector(".ws-song-title").innerText;
-            song.id = target.getAttribute("data-ws-id");
-            resolve(song);
-          }
-        }
+        var song = extractSongDetails(target);
+        resolve(song);
       });
       return promise;
     }
@@ -117,7 +107,7 @@ window.addEventListener("load",function(){
       queueSongArtist.classList.add("ws-queue-song-artist");
 
       queueSong.innerText = song.title;
-      //queueSongArtist.innerText = song.artist;
+      queueSongArtist.innerText = song.artist;
       parent.appendChild(queueRow);
       queueRow.appendChild(queueSong);
       queueRow.appendChild(queueSongArtist);
