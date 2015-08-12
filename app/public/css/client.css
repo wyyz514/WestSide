@@ -186,6 +186,9 @@ body
   width:100%;
   height:calc(100vh - 6em);
   background-color:#222;
+  background-image:url(https://unsplash.imgix.net/photo-1422513391413-ddd4f2ce3340?fit=crop&fm=jpg&h=700&q=75&w=1050);
+  background-size:100%;
+  background-position:bottom center;
   overflow:auto;
 }
 
@@ -214,8 +217,10 @@ body
 
 .ws-queue-row
 {
-  width:100%;
+  width:80%;
   margin:0 auto;
+  background-color:#222;
+  border-bottom:1px solid #333;
   height:5em;
   font-family:"Source Sans Pro";
 }
