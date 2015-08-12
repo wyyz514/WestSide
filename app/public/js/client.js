@@ -22,7 +22,7 @@ window.addEventListener("load",function(){
       }
       
       song.link = _target.querySelector(".ws-song-info").getAttribute("data-ws-href");
-      song.title = target.querySelector(".ws-song-info .ws-song-title").innerText;
+      song.title = _target.querySelector(".ws-song-info .ws-song-title").innerText;
       song.id = _target.getAttribute("data-ws-id");
       song.img = _target.querySelector(".ws-song-avatar img").getAttribute("src");
       song.artist = _target.querySelector(".ws-song-artist").innerText;
