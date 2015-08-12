@@ -96,11 +96,18 @@ window.addEventListener("load",function(){
     
     function renderRow(song)
     {
-      console.log("Rendering queue");
+      console.log("Rendering row");
       var parent = document.querySelector("#ws-queue");
+      var songArt = document.createElement("div");
+      songArt.classList.add("ws-queue-song-artwork");
+      var songArtImg = document.createElement("img");
+      songArtImg.setAttribute("src",song.img);
+      songArt.appendChild(songArtImg);
       var queueRow = document.createElement("div");
       var queueSong = document.createElement("div");
       var queueSongArtist = document.createElement("div");
+      var queueSongDetails = document.createElement("div");
+      queueSongDetails.classList.add("ws-queue-song-details");
       queueRow.classList.add("ws-queue-row");
       queueRow.setAttribute("data-ws-id",song.id);
       queueSong.classList.add("ws-queue-song");
@@ -109,8 +116,10 @@ window.addEventListener("load",function(){
       queueSong.innerText = song.title;
       queueSongArtist.innerText = song.artist;
       parent.appendChild(queueRow);
-      queueRow.appendChild(queueSong);
-      queueRow.appendChild(queueSongArtist);
+      queueRow.appendChild(songArt);
+      queueSongDetails.appendChild(queueSong);
+      queueSongDetails.appendChild(queueSongArtist);
+      queueRow.appendChild(queueSongDetails);
     }
     
     function initListeners()

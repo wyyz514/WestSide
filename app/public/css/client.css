@@ -215,8 +215,14 @@ body
 .ws-queue-row
 {
   width:100%;
+  margin:0 auto;
   height:5em;
   font-family:"Source Sans Pro";
+}
+
+.ws-queue-row>div
+{
+  float:left;
 }
 
 #ws-queue .ws-divider
@@ -224,22 +230,46 @@ body
   background-color:#d35400;
 }
 
+.ws-queue-song-artwork
+{
+  width:5em;
+  height:100%;
+}
+
+.ws-queue-song-artwork img
+{
+  height:100%;
+  width:100%%;
+}
+
+.ws-queue-song-details
+{
+  width:calc(100% - 6em);
+  height:100%;
+  -webkit-box-sizing:border-box;
+  box-sizing:border-box;
+  padding:7px;
+}
+
 .ws-queue-song
 {
   height:3em;
   width:100%;
-  font-size:1.3em;
+  line-height:3em;
+  font-size:1em;
   text-transform:capitalize;
   color:#d35400;
   font-weight:700;
-  line-height:3em;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
 }
 
 .ws-queue-song-artist
 {
-  height:1em;
+  height:2em;
   width:100%;
-  font-size:1em;
-  color:#d35400;
+  font-size:0.9em;
   line-height:0;
+  color:#d35400;
 }
