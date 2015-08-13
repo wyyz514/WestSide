@@ -65,7 +65,7 @@ window.addEventListener("load",function(){
       var elQueue = document.querySelector("#ws-queue");
       var elFirst = elQueue.firstElementChild;
       var elLast = elQueue.lastElementChild;
-      if(elQueue.childElementCount > 0)
+      if(first && elQueue.childElementCount > 0)
       {
         while(elFirst.getAttribute("data-ws-id") !== first.id)
         {
