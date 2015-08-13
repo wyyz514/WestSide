@@ -37,7 +37,7 @@ window.addEventListener("load",function(){
     function init()
     {
       var self = this;
-      var urlBase = "https://www.dry-tor1298.herokuapp.com/?url=";
+      var urlBase = "https://www.dry-tor-1298.herokuapp.com/?url=";
       if(!this.widget)
       {
         var iframe = getIframe();
