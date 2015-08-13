@@ -24,8 +24,7 @@ server.listen(port,function(){
 SC.init({
   id:"34b370aa58ea274d0480fdd2fe51722a",
   secret:"97708910783570592a82d0a37f462f57",
-  uri:"http://127.0.0.1:5000/success"
-  //uri:"https://dry-tor-1298.herokuapp.com/success"
+  uri:"https://dry-tor-1298.herokuapp.com/success"
 });
 //request handlers
 app.get("/",function(req,res){
@@ -64,25 +63,42 @@ app.get("/success",function(req,res){
 });
 
 io.on("connection",function(socket){
-  console.log("Got connection");
+  console.log("Got connection",socket.id);
+  socket.on("player",function(){
+    if(songQueue)
+      socket.emit("tracks",{queue:JSON.stringify(songQueue.getQueue())});
+  });
+  
   socket.on("authed",function(){
     console.log("Authed");
     user.socket = socket;
     user.nickname = "Anon Y. Mous"; 
+   
     if(songQueue)
     {
       socket.emit("sync",{queue:JSON.stringify(songQueue.getQueue())});
+      socket.broadcast.emit("sync",{queue:JSON.stringify(songQueue.getQueue())});
     }
   });
   socket.on("queue",function(msg){
     var song = JSON.parse(msg.song);
     songQueue.enqueue(song);
     this.emit("sync",{queue:JSON.stringify(songQueue.getQueue())});
+    this.broadcast.emit("sync",{queue:JSON.stringify(songQueue.getQueue())});
   });
+  socket.on("deque",function(){
+    songQueue.dequeue();
+    socket.emit("sync",{queue:JSON.stringify(songQueue.getQueue())});
+    socket.broadcast.emit("sync",{queue:JSON.stringify(songQueue.getQueue())});
+  })
 });
 
 //------------------- END OF SETUP -------------------//
 
 app.get("/app",function(req,res){
-  res.render("app",{favs:user.favs});
+  res.render("app",{favs:user.favs,title:"Westside App"});
+});
+
+app.get("/plyr",function(req,res){
+  res.render("plyr",{title:"Plyr"});
 });

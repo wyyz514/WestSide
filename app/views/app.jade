@@ -3,15 +3,16 @@ block title
   meta(charset="utf-8")
   meta(http-equiv="X-UA-Compatible" content="IE=edge")
   meta(name="viewport" content="width=device-width, initial-scale=1")
-  title="WestSide App"
+  title #{title}
   link(rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400:700")
   link(rel="stylesheet" type="text/css" href="css/client.css")
   link(rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css")
 body
-block content
+block header
   div(id="ws-header")
     div(id="ws-logo")
       div(id="ws-logo-sb")="W"
+block content
   div(id="ws-container")
     div(id="ws-songs")
       each fav in favs
@@ -35,4 +36,3 @@ block content
       div(id="ws-queue")
   script(src="js/socket.io/socket.io.js")
   script(src="js/client.js")
-  
