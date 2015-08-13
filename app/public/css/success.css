@@ -1,0 +1,36 @@
+body
+{
+  margin:0;
+  padding:0;
+  background-color:#000;
+}
+
+#ws-auth-success
+{
+  font-family:"Source Sans Pro";
+  color:#fff;
+  height:3em;
+  width:100%;
+  text-align:center;
+  margin:auto;
+  position:relative;
+  top:7em;
+  font-size:2em;
+  color:#ff5500;
+}
+
+#ws-load-button
+{
+  width:8em;
+  position:relative;
+  top:6em;
+  height:3em;
+  text-align:center;
+  margin:auto;
+  color:#000;
+  background-color:#ff5500;
+  border-radius:3px;
+  line-height:3em;
+  font-family:"Source Sans Pro";
+  cursor:pointer;
+}
