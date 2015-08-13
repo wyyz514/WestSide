@@ -41,7 +41,7 @@ window.addEventListener("load",function(){
       if(!this.widget)
       {
         var iframe = getIframe();
-        iframe.setAttribute("src",urlBase+this.queue.pop().link);
+        iframe.setAttribute("src","/?url="+this.queue.pop().link);
         this.widget = SC.Widget(iframe);
         document.body.appendChild(iframe);
         this.widget.play();
