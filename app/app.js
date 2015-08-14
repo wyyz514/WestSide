@@ -87,7 +87,7 @@ io.on("connection",function(socket){
     this.emit("sync",{queue:JSON.stringify(songQueue.getQueue())});
     this.broadcast.emit("sync",{queue:JSON.stringify(songQueue.getQueue())});
   });
-  socket.on("deque",function(){
+  socket.on("dequeue",function(){
     songQueue.dequeue();
     socket.emit("sync",{queue:JSON.stringify(songQueue.getQueue())});
     socket.broadcast.emit("sync",{queue:JSON.stringify(songQueue.getQueue())});

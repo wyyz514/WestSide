@@ -6,6 +6,7 @@ window.addEventListener("load",function(){
     console.log("Tracks");
     queue = JSON.parse(msg.queue);
     PlayerManager.updateQ(queue);
+    PlayerManager.init();
   });
 
   socket.on("sync",function(msg){
@@ -15,7 +16,7 @@ window.addEventListener("load",function(){
   });
   
   var PlayerManager = (function(socket){
-    
+    var isPlaying = false;
     function updateQ(queue)
     {
       this.queue = queue;
@@ -37,6 +38,8 @@ window.addEventListener("load",function(){
     function init()
     {
       var urlBase = "https://w.soundcloud.com/player/?url=";
+      if(this.queue.length === 0)
+        return;
       if(!this.widget)
       {
         var iframe = getIframe();
@@ -44,14 +47,16 @@ window.addEventListener("load",function(){
         console.log(iframe.src);
         this.widget = SC.Widget(iframe);
         document.body.appendChild(iframe);
-        this.widget.play();
+        this.widget.bind(SC.Widget.Events.FINISH,function(){
+          PlayerManager.init();
+        });
       }
       else
       {
         this.widget.load(this.queue.pop().link,{auto_play:true});
         console.log(getIframe().src);
       }
-      socket.emit("deque");
+      socket.emit("dequeue");
       return this.widget;
     }
     
@@ -61,5 +66,6 @@ window.addEventListener("load",function(){
     }
   })(socket);
   
-  window.PM = PlayerManager;
+  PlayerManager.init = PlayerManager.init.bind(PlayerManager);
+  
 });

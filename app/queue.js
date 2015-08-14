@@ -20,12 +20,12 @@ QueueManager.prototype.dequeue = function()
   if(this.queue.length !== 0)
   {
     var song = this.queue.pop();
-    var song_id = song.id;
-    if(this.song_ids.indexOf(song_id) >= 0)
-    {
-      this.song_ids = this.song_ids.slice(this.song_ids.indexOf(song_id),1)
-      return song;
-    }
+    var id = song.id;
+    this.song_ids = this.song_ids.filter(function(song){
+      if(song.id !== id)
+        return song.id;
+    });
+    console.log("Removing:",song.title);
   }
   else
     console.log("Queue is empty");
