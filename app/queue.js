@@ -18,7 +18,15 @@ QueueManager.prototype.enqueue = function(item)
 QueueManager.prototype.dequeue = function()
 {
   if(this.queue.length !== 0)
-    return this.queue.pop();
+  {
+    var song = this.queue.pop();
+    var song_id = song.id;
+    if(this.song_ids.indexOf(song_id) >= 0)
+    {
+      this.song_ids = this.song_ids.slice(this.song_ids.indexOf(song_id),1)
+      return song;
+    }
+  }
   else
     console.log("Queue is empty");
 }

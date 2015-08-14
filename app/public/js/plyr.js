@@ -36,18 +36,21 @@ window.addEventListener("load",function(){
     
     function init()
     {
-      var self = this;
       var urlBase = "https://w.soundcloud.com/player/?url=";
       if(!this.widget)
       {
         var iframe = getIframe();
-        iframe.setAttribute("src",urlBase+this.queue.pop().link);
+        iframe.setAttribute("src",urlBase+this.queue.pop().link+"&auto_play=true");
+        console.log(iframe.src);
         this.widget = SC.Widget(iframe);
         document.body.appendChild(iframe);
         this.widget.play();
       }
       else
-        this.widget.load(urlBase+this.queue.pop().link,{auto_play:true})
+      {
+        this.widget.load(this.queue.pop().link,{auto_play:true});
+        console.log(getIframe().src);
+      }
       socket.emit("deque");
       return this.widget;
     }

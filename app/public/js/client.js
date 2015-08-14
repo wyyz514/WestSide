@@ -58,6 +58,7 @@ window.addEventListener("load",function(){
     
     function updateQueue(queue)
     {
+      console.log("Updating queue");
       var queueSize = queue.length;
       var first = queue[queueSize - 1];
       var last = queue[0];
@@ -67,11 +68,12 @@ window.addEventListener("load",function(){
       var elLast = elQueue.lastElementChild;
       if(first && elQueue.childElementCount > 0)
       {
-        while(elFirst.getAttribute("data-ws-id") !== first.id)
+        while(elFirst !== elQueue && elFirst.getAttribute("data-ws-id") !== first.id)
         {
+          console.log("FIQ:",first,"FEC:",elFirst);
           console.log("Removing:",elFirst);
           elQueue.removeChild(elFirst);
-          elFirst = elQueue.firstElementChild;
+          elFirst = elQueue.firstElementChild? elQueue.firstElementChild:elQueue;
         }
         
         while(marker < queueSize 
@@ -87,6 +89,12 @@ window.addEventListener("load",function(){
       else
       {
         console.log("No songs in queue. Adding songs");
+        if(elQueue.firstElementChild)
+        {
+          var el = elQueue.firstElementChild;
+          el.parentElement.removeChild(el);
+        }
+        
         for(var index = queueSize - 1; index >= 0; index--)
         {
           renderRow(queue[index]);
