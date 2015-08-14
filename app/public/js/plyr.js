@@ -37,11 +37,11 @@ window.addEventListener("load",function(){
     function init()
     {
       var self = this;
-      var urlBase = "https://www.dry-tor-1298.herokuapp.com/?url=";
+      var urlBase = "https://w.soundcloud.com/player/?url=";
       if(!this.widget)
       {
         var iframe = getIframe();
-        iframe.setAttribute("src","/?url="+this.queue.pop().link);
+        iframe.setAttribute("src",urlBase+this.queue.pop().link);
         this.widget = SC.Widget(iframe);
         document.body.appendChild(iframe);
         this.widget.play();
