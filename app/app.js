@@ -40,7 +40,8 @@ app.get("/success",function(req,res){
     res
     .render("success",
       {
-        token:req.query.code
+        token:req.query.code,
+        title:"Success"
       }
     );
   }
