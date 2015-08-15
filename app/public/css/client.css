@@ -276,7 +276,7 @@ body
   width:100%;
   font-size:0.9em;
   line-height:0;
-  color:#AB47BC;
+  color:#444;
 }
 
 .ws-player-backdrop
@@ -328,7 +328,7 @@ body
 
 .ws-player-song-info
 {
-  border-left:2px solid #AB47BC;
+  border-left:1px solid #444;
   width:80%;
   height:3em;
   margin:auto;
@@ -350,7 +350,7 @@ body
 {
   height:1em;
   font-size:0.9em;
-  color:#AB47BC;
+  color:#555;
   font-family:"Source Sans Pro";
 }
 
