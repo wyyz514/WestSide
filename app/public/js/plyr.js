@@ -11,8 +11,24 @@ window.addEventListener("load",function(){
 
   socket.on("sync",function(msg){
     queue = JSON.parse(msg.queue);
-   console.log(msg.np); PlayerManager.renderQueue(diff(PlayerManager.queue,queue));
+   setNP(msg.np);
+  PlayerManager.renderQueue(diff(PlayerManager.queue,queue));
   });
+  
+  function setNP(np)
+  {
+    var title = document.querySelector(".ws-player-np-title");
+    var img = document.querySelector(".ws-player-np-img");
+    var artist = document.querySelector(".ws-player-np-artist");
+    
+    if(np !== PlayerManager.np)
+    {
+      title.innerText = np.title;
+      img.style.backgroundImage = "url("+np.img+")";
+      artist.innerText = np.artist;
+    }
+    
+  }
   
   function diff(q1,q2)
   {
@@ -122,7 +138,7 @@ window.addEventListener("load",function(){
     function pollSong()
     {
       var poll = setInterval(function(){
-        if(queue.length > 0)
+        if(PlayerManager.queue.length > 0)
         {
           PlayerManager.init();
           clearInterval(poll);
