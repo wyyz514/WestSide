@@ -10,8 +10,8 @@ var SC = require("node-soundcloud");
 var User = require("./user.js");
 var client = require("./interface.js");
 var QueueManager = require("./queue.js");
-var user = new User();
 var songQueue = new QueueManager();
+var user;
 //express config
 app.set("view engine","jade");
 app.set("views",path.join(__dirname,"/views"));
@@ -33,6 +33,7 @@ app.get("/",function(req,res){
 });
 //authentication
 app.get("/success",function(req,res){
+  user = new User();
   if(req.query.code)
   {
     user.code = req.query.code;
