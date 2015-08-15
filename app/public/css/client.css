@@ -20,7 +20,7 @@ body
   position:relative;
   height:1.5em;
   width:1.5em;
-  border:1px solid #ff5500;
+  border:1px solid #AB47BC;
   margin:0 auto;
   -webkit-transform:rotate(45deg);
   transform:rotate(45deg);
@@ -32,7 +32,7 @@ body
   position:absolute;
   -webkit-transform:rotate(-45deg);
   transform:rotate(-45deg);
-  color:#ff5500;
+  color:#AB47BC;
   text-align:center;
   font-family:"Source Sans Pro";
   top:0;
@@ -165,7 +165,7 @@ body
 
 #ws-np-text
 {
-  color:#ff5500;
+  color:#AB47BC;
   text-transform:uppercase;
   letter-spacing:2px;
   font-size:0.8em;
@@ -263,7 +263,7 @@ body
   line-height:3em;
   font-size:1em;
   text-transform:capitalize;
-  color:#d35400;
+  color:#AB47BC;
   font-weight:700;
   overflow:hidden;
   text-overflow:ellipsis;
@@ -276,5 +276,88 @@ body
   width:100%;
   font-size:0.9em;
   line-height:0;
-  color:#d35400;
+  color:#AB47BC;
+}
+
+.ws-player-backdrop
+{
+  height:25em;
+  width:100%;
+  background-image:url(https://unsplash.imgix.net/photo-1422513391413-ddd4f2ce3340?fit=crop&fm=jpg&h=700&q=75&w=1050);
+  background-size:cover;
+  background-repeat:repeat;
+  background-position:bottom left;
+  position:fixed;
+  top:0;
+  left:0;
+}
+
+.ws-player-backdrop-pattern
+{
+  position:absolute;
+  top:0;
+  left:0;
+  height:100%;
+  width:100%;
+  background-image:url("/img/maze.png");
+  background-repeat:repeat;
+  opacity:0.75;
+}
+
+.ws-player-queue
+{
+  position:fixed;
+  overflow:auto;
+  top:23em;
+  left:0;
+  height:18em;
+  width:100%;
+  background-color:#222;
+  box-shadow:0 0 25px 5px #000;
+}
+
+.ws-player-song-row
+{
+  height:4em;
+  width:100%;
+  border-bottom:1px solid #333;
+  display:flex;
+  -webkit-display:flex;
+  align-items:center;
+}
+
+.ws-player-song-info
+{
+  border-left:2px solid #AB47BC;
+  width:80%;
+  height:3em;
+  margin:auto;
+  box-sizing:border-box;
+  -webkit-box-sizing:border-box;
+  padding-left:7px;
+}
+
+.ws-player-song-name
+{
+  height:1.5em;
+  font-size:1em;
+  color:#AB47BC;
+  font-weight:700;
+  font-family:"Source Sans Pro";
+}
+
+.ws-player-song-artist
+{
+  height:1em;
+  font-size:0.9em;
+  color:#AB47BC;
+  font-family:"Source Sans Pro";
+}
+
+iframe
+{
+  position:fixed;
+  top:3em;
+  left:0;
+  z-index:1000000000000000;
 }
