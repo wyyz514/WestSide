@@ -139,6 +139,8 @@ body
   left:0;
   background-color:#333;
   -webkit-transition:all 0.5s ease-in-out;
+  -webkit-backface-visibility:hidden;
+  backface-visibility:hidden;
 }
 
 #ws-footer.ws-queue-active
@@ -187,7 +189,7 @@ body
   height:calc(100vh - 6em);
   background-color:#222;
   background-image:url(https://unsplash.imgix.net/photo-1422513391413-ddd4f2ce3340?fit=crop&fm=jpg&h=700&q=75&w=1050);
-  background-size:100%;
+  background-size:cover;
   background-repeat:no-repeat;
   background-position:bottom center;
   overflow:auto;
