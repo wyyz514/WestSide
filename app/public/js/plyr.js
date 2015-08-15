@@ -11,7 +11,7 @@ window.addEventListener("load",function(){
 
   socket.on("sync",function(msg){
     queue = JSON.parse(msg.queue);
-    PlayerManager.renderQueue(diff(PlayerManager.queue,queue));
+   console.log(msg.np); PlayerManager.renderQueue(diff(PlayerManager.queue,queue));
   });
   
   function diff(q1,q2)
@@ -23,7 +23,7 @@ window.addEventListener("load",function(){
     
     if(discr > 0)
     {
-      for(var index = discr; index >= 0; index--)
+      for(var index = discr - 1; index >= 0; index--)
       {
         difference.push(q2[index]);
       }
@@ -74,7 +74,6 @@ window.addEventListener("load",function(){
     function renderQueue()
     {
       var args = arguments[0];
-      if(args
       if(args
       && Object.prototype.toString.call(args) == "[object Array]")
       {

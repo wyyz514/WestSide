@@ -17,9 +17,10 @@ QueueManager.prototype.enqueue = function(item)
 
 QueueManager.prototype.dequeue = function()
 {
+  var song = "";
   if(this.queue.length !== 0)
   {
-    var song = this.queue.pop();
+    song = this.queue.pop();
     var id = song.id;
     this.song_ids = this.song_ids.filter(function(song){
       if(song.id !== id)
@@ -29,6 +30,7 @@ QueueManager.prototype.dequeue = function()
   }
   else
     console.log("Queue is empty");
+  return song;
 }
 
 QueueManager.prototype.getQueue = function(){

@@ -276,7 +276,7 @@ body
   width:100%;
   font-size:0.9em;
   line-height:0;
-  color:#444;
+  color:#555;
 }
 
 .ws-player-backdrop
@@ -337,6 +337,13 @@ body
   padding-left:7px;
 }
 
+.ws-player-song-info>div
+{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
 .ws-player-song-name
 {
   height:1.5em;
@@ -348,7 +355,7 @@ body
 
 .ws-player-song-artist
 {
-  height:1em;
+  height:1.5em;
   font-size:0.9em;
   color:#555;
   font-family:"Source Sans Pro";
@@ -357,7 +364,52 @@ body
 iframe
 {
   position:fixed;
-  top:3em;
+  top:20em;
   left:0;
-  z-index:1000000000000000;
+  visibility:hidden;
+}
+
+.ws-player-np
+{
+  position:fixed;
+  top:6em;
+  left:0;
+  z-index:999;
+  height:100%;
+  width:100%;
+}
+.ws-player-np>div
+{
+  display:block;
+  margin:auto;
+  text-align:center;
+  font-family:"Source Sans Pro";
+}
+
+.ws-player-np-title,.ws-player-np-artist
+{
+  height:3em;
+  width:80%;
+  line-height:3em;
+}
+
+.ws-player-np-title
+{
+  font-size:1em;
+  color:#AB47BC;
+
+}
+
+.ws-player-np-artist
+{
+  font-size:0.9em;
+  color:#777;
+}
+
+.ws-player-np-img
+{
+  height:8em;
+  width:8em;
+  background-size:cover;
+  background-repeat:no-repeat;
 }
