@@ -20,12 +20,10 @@ window.addEventListener("load",function(){
     var q1size = q1.length;
     var q2size = q2.length;
     var discr = q2size - q1size;
-    console.log("First in local:",q1[q1size - 1]);
-    console.log("First in remote:",q2[q2size - 1]);
-
+    
     if(discr > 0)
     {
-      for(var index = discr - 1; index >= 0; index--)
+      for(var index = discr; index >= 0; index--)
       {
         difference.push(q2[index]);
       }
@@ -77,12 +75,14 @@ window.addEventListener("load",function(){
     {
       var args = arguments[0];
       if(args
+      if(args
       && Object.prototype.toString.call(args) == "[object Array]")
       {
         var len = args.length;
         for(var index = 0; index < len; index++)
         {
           (function(obj){
+            console.log(obj);
             var song = args.pop();
             obj.queue.unshift(song);
             renderRow(song);
