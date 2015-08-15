@@ -4,11 +4,23 @@ window.addEventListener("load",function(){
   socket.emit("authed");  
   socket.on("sync",function(msg){
     console.log("Sync received");
+    var np = msg.np;
+    setNP(np);
     var queue = JSON.parse(msg.queue);
     console.log(queue);
     ClientManager.syncQueue(queue);
     ClientManager.updateQueue(queue);
   });
+  
+  function setNP(song)
+  {
+    var np = document.querySelector("#ws-current-track");
+    if(song && song.title !== ClientManager.np)
+    {
+      np.innerText = song.title;
+      ClientManager.np = song.title;
+    }
+  }
   
   var ClientManager = (function(socket){
     
