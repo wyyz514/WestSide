@@ -24,7 +24,8 @@ server.listen(port,function(){
 SC.init({
   id:"34b370aa58ea274d0480fdd2fe51722a",
   secret:"97708910783570592a82d0a37f462f57",
-  uri:"https://dry-tor-1298.herokuapp.com/success"
+  uri:"http://127.0.0.1:5000/success"
+//  uri:"https://dry-tor-1298.herokuapp.com/success"
 });
 //request handlers
 app.get("/",function(req,res){

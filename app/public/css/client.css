@@ -181,6 +181,7 @@ body
   font-size:0.85em;
   text-transform:capitalize;
   height:60%;
+  width:100%;
 }
 
 #ws-queue

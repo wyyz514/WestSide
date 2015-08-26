@@ -6,7 +6,7 @@ function QueueManager()
 
 QueueManager.prototype.enqueue = function(item)
 {
-  
+  console.log(this.song_ids.indexOf(item.id),item.title);
   if(this.song_ids.indexOf(item.id) < 0)
   {
     this.song_ids.push(item.id);
@@ -22,10 +22,8 @@ QueueManager.prototype.dequeue = function()
   {
     song = this.queue.pop();
     var id = song.id;
-    this.song_ids = this.song_ids.filter(function(song){
-      if(song.id !== id)
-        return song.id;
-    });
+    var idx = this.song_ids.indexOf(id);
+    this.song_ids.splice(idx,1);
     console.log("Removing:",song.title);
   }
   else
