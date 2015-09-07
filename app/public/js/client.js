@@ -4,8 +4,7 @@ window.addEventListener("load",function(){
   socket.emit("authed");  
   socket.on("sync",function(msg){
     console.log("Sync received");
-    var np = msg.np;
-    setNP(np);
+    setNP(msg.np);
     var queue = JSON.parse(msg.queue);
     console.log(queue);
     ClientManager.syncQueue(queue);

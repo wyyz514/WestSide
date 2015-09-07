@@ -418,3 +418,32 @@ iframe
   background-size:cover;
   background-repeat:no-repeat;
 }
+
+@media only screen and (max-width:1024px)
+{
+  .ws-song-avatar
+  {
+    width:20%;
+  }
+  
+  .ws-song-info
+  {
+    width:60%;
+    padding-left:10px;
+  }
+  
+  .ws-song-title
+  {
+    font-size:0.8em;
+  }
+  
+  .ws-song-status
+  {
+    width:20%;
+  }
+  
+  .ws-song-status-icon
+  {
+    width:50%;
+  }
+}

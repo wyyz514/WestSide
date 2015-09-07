@@ -79,8 +79,8 @@ io.on("connection",function(socket){
    
     if(songQueue)
     {
-      socket.emit("sync",{queue:JSON.stringify(songQueue.getQueue())});
-      socket.broadcast.emit("sync",{queue:JSON.stringify(songQueue.getQueue())});
+      socket.emit("sync",{queue:JSON.stringify(songQueue.getQueue()),np:app.now_playing});
+      socket.broadcast.emit("sync",{queue:JSON.stringify(songQueue.getQueue()),np:app.now_playing});
     }
   });
   socket.on("queue",function(msg){
@@ -91,6 +91,7 @@ io.on("connection",function(socket){
   });
   socket.on("dequeue",function(){
     var song = songQueue.dequeue();
+    app.now_playing = song;
     socket.emit("sync",{queue:JSON.stringify(songQueue.getQueue()),np:song});
     socket.broadcast.emit("sync",{queue:JSON.stringify(songQueue.getQueue()),np:song});
   })
