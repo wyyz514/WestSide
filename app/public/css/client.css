@@ -53,7 +53,8 @@ body
 #ws-songs
 {
   width:100%;
-  height:auto;
+  height:calc(100vh - 6em);
+  overflow-y:scroll;
 }
 
 .ws-song-row
