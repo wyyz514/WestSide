@@ -1,4 +1,4 @@
-$document.ready(function(){
+window.addEventListener("load",function(){
   var queue = [];
   var socket = io();
   socket.emit("authed");  
