@@ -19,6 +19,7 @@
   "dependencies": {
     "express": "^4.13.3",
     "jade": "^1.11.0",
+    "jquery": "^2.1.4",
     "machinepack-soundcloud": "^0.3.1",
     "node-soundcloud": "0.0.3",
     "q": "^1.4.1",

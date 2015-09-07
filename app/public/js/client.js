@@ -1,4 +1,4 @@
-window.addEventListener("load",function(){
+$document.ready(function(){
   var queue = [];
   var socket = io();
   socket.emit("authed");  
@@ -145,7 +145,7 @@ window.addEventListener("load",function(){
     {
       var rows = document.querySelectorAll("div.ws-song-row");
       Array.prototype.forEach.call(rows,function(row){
-        row.addEventListener("click",function(ev){
+        $(row).on("click touchstart",function(ev){
           queueSong(ev).then(function(song){
             console.log(song);
             var _song = JSON.stringify(song);
